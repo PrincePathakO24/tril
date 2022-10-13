@@ -1,0 +1,200 @@
+1.Create Table
+
+a. Write a SQL statement to create a table named jobs including columns job_id,
+ job_title, min_salary, max_salary and check whether the max_salary amount exceeding the upper limit 25000.
+ 
+ 
+mysql> create database SQL_Lab1;
+mysql> use SQL_Lab1;
+Database changed
+
+mysql> create table jobs (job_id varchar(10), job_title varchar(20), min_salary varchar(10), max_salary varchar(10));
+
+mysql> Alter table jobs modify max_salary int;
+mysql> Alter table jobs modify max_salary int check (max_salary>25000);
+
+mysql> show tables;
++--------------------+
+| Tables_in_sql_lab1 |
++--------------------+
+| jobs               |
++--------------------+
+
+mysql> desc jobs;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| job_id     | varchar(10) | YES  |     | NULL    |       |
+| job_title  | varchar(20) | YES  |     | NULL    |       |
+| min_salary | varchar(10) | YES  |     | NULL    |       |
+| max_salary | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+mysql> Alter table jobs modify job_id int;
+mysql> desc jobs;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| job_id     | int         | YES  |     | NULL    |       |
+| job_title  | varchar(20) | YES  |     | NULL    |       |         
+| min_salary | varchar(10) | YES  |     | NULL    |       |
+| max_salary | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+
+b. Write a SQL statement to create a table named countries including columns country_id, 
+country_name and region_id and make sure that no countries except Italy, India and China will be entered in the table.
+
+mysql> create table countries (country_id varchar(20) , country_name varchar(20)  ,region_id varchar(20));
+
+mysql> Alter table countries modify  country_name enum('Italy','India','China') ;
+mysql> desc countries;
++--------------+-------------------------------+------+-----+---------+-------+
+| Field        | Type                          | Null | Key | Default | Extra |
++--------------+-------------------------------+------+-----+---------+-------+
+| country_id   | varchar(20)                   | YES  |     | NULL    |       |
+| country_name | enum('Italy','India','China') | YES  |     | NULL    |       |
+| region_id    | varchar(20)                   | YES  |     | NULL    |       |
++--------------+-------------------------------+------+-----+---------+-------+
+
+mysql> Alter table job_history modify job_id int;
+mysql> desc job_history;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | varchar(10) | NO   | PRI | NULL    |       |
+| start_date    | date        | YES  |     | NULL    |       |
+| end_date      | date        | YES  |     | NULL    |       |
+| job_id        | int         | YES  |     | NULL    |       |
+| department_id | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+
+
+c.Write a SQL statement to create a table job_history including columns employee_id, start_date, end_date,
+ job_id and department_id and make sure that, the employee_id column does not contain any duplicate value at the time of insertion  
+
+mysql> create table job_history (employee_id varchar(10) Primary key, start_date date , end_date date , job_id varchar(10) , department_id varchar(10));
+mysql> desc job_history ;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | varchar(10) | NO   | PRI | NULL    |       |
+| start_date    | date        | YES  |     | NULL    |       |
+| end_date      | date        | YES  |     | NULL    |       |
+| job_id        | varchar(10) | YES  |     | NULL    |       |
+| department_id | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+
+mysql> Alter table job_history modify job_id int;
+mysql> desc job_history;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | varchar(10) | NO   | PRI | NULL    |       |
+| start_date    | date        | YES  |     | NULL    |       |
+| end_date      | date        | YES  |     | NULL    |       |
+| job_id        | int         | YES  |     | NULL    |       |
+| department_id | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+
+
+
+	
+
+	
+2.Alter Table
+
+a.Write a SQL statement to add a foreign key constraint named fk_job_id on job_id column of job_history table referencing to the primary key job_id of jobs table.
+
+
+mysql> alter table jobs add constraint fk_job_id primary key(job_id);
+mysql> alter table job_history add constraint fk_job_id foreign key(job_id) references jobs(job_id);
+
+mysql> desc job_history;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| employee_id   | varchar(10) | NO   | PRI | NULL    |       |
+| start_date    | date        | YES  |     | NULL    |       |
+| end_date      | date        | YES  |     | NULL    |       |
+| job_id        | int         | YES  | MUL | NULL    |       |
+| department_id | varchar(10) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+
+
+b.Write a SQL statement to rename the table countries to country_new.
+
+mysql> Alter table countries rename country_new ;
+mysql> desc country_new ;
++--------------+-------------------------------+------+-----+---------+-------+
+| Field        | Type                          | Null | Key | Default | Extra |
++--------------+-------------------------------+------+-----+---------+-------+
+| country_id   | varchar(20)                   | YES  |     | NULL    |       |
+| country_name | enum('Italy','India','China') | YES  |     | NULL    |       |
+| region_id    | varchar(20)                   | YES  |     | NULL    |       |
++--------------+-------------------------------+------+-----+---------+-------+
+
+
+c.Write a SQL statement to change the name of the column country_id to con_id, 
+keeping the data type and size same.
+
+mysql> alter table country_new RENAME COLUMN country_id to con_id;
+mysql> desc country_new ;
++--------------+-------------------------------+------+-----+---------+-------+
+| Field        | Type                          | Null | Key | Default | Extra |
++--------------+-------------------------------+------+-----+---------+-------+
+| con_id       | varchar(20)                   | YES  |     | NULL    |       |
+| country_name | enum('Italy','India','China') | YES  |     | NULL    |       |
+| region_id    | varchar(20)                   | YES  |     | NULL    |       |
++--------------+-------------------------------+------+-----+---------+-------+
+
+
+
+
+
+3.DML Statement
+
+a.Write a SQL statement to insert a record with your own value into the table countries against each columns.
+
+mysql> insert into country_new (con_id,country_name,region_id) values ('02','INDIA', 'HU7839');
+mysql> insert into country_new (con_id,country_name,region_id) values ('07','CHINA', 'KT63');
+
+mysql> Select * from country_new;
++--------+--------------+-----------+
+| con_id | country_name | region_id |
++--------+--------------+-----------+
+| 02     | India        | HU7839    |
+| 07     | China        | KT63      |
++--------+--------------+-----------+
+
+
+b.Write a SQL statement to insert 5 rows by a single insert statement into jobs table.
+
+mysql>  insert into jobs(job_id,job_title,min_salary,max_Salary) values(634,'Full_Stack_Developer',64000,85000),(846,'Java_Developer',59900,74000),(267,'Python_Developer',3380,54000),(563,' HTML_Developer',32000,54000),(456,'C++_Developer',42000,64000);
+mysql> Select * from jobs;
++--------+----------------------+------------+------------+
+| job_id | job_title            | min_salary | max_salary |
++--------+----------------------+------------+------------+
+|    267 | Python_Developer     | 3380       |      54000 |
+|    456 | C++_Developer        | 42000      |      64000 |
+|    563 |  HTML_Developer      | 32000      |      54000 |
+|    634 | Full_Stack_Developer | 64000      |      85000 |
+|    846 | Java_Developer       | 59900      |      74000 |
++--------+----------------------+------------+------------+
+
+
+c.Write a SQL statement to change Min_salary  to 8000 and max_Salary to 40000 for programmer.
+
+mysql> update jobs set min_salary=55000,max_salary=90000 where job_title='Full_Stack_Developer';
+mysql> Select * from jobs;
++--------+----------------------+------------+------------+
+| job_id | job_title            | min_salary | max_salary |
++--------+----------------------+------------+------------+
+|    267 | Python_Developer     | 3380       |      54000 |
+|    456 | C++_Developer        | 42000      |      64000 |
+|    563 |  HTML_Developer      | 32000      |      54000 |
+|    634 | Full_Stack_Developer | 55000      |      90000 |
+|    846 | Java_Developer       | 59900      |      74000 |
++--------+----------------------+------------+------------+
+
+
+
