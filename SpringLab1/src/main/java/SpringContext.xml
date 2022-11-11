@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+               http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<context:annotation-config />
+
+	<!-- Books -->
+	
+	<!-- Books class bean 1-->
+	<bean id="book1" class="com.hibernate.SpringLab1.Book">
+		<constructor-arg name="b_id" value="E36"></constructor-arg>
+		<constructor-arg name="b_name" value="JAVA"></constructor-arg>
+		<constructor-arg name="price" value="999"></constructor-arg>
+	</bean>
+	
+	<!-- Books class bean 2-->
+	<bean id="book2" class="com.hibernate.SpringLab1.Book">
+		<constructor-arg name="b_id" value="D87">
+		</constructor-arg>
+		<constructor-arg name="b_name" value="C#"></constructor-arg>
+		<constructor-arg name="price" value="759"></constructor-arg>
+	</bean>
+	
+	
+	<!-- Books class bean 3-->
+	<bean id="book3" class="com.hibernate.SpringLab1.Book">
+		<constructor-arg name="b_id" value="F74"></constructor-arg>
+		<constructor-arg name="b_name" value="C++"></constructor-arg>
+		<constructor-arg name="price" value="799"></constructor-arg>
+	</bean>
+	
+	
+	<!-- Books class bean 4-->
+	<bean id="book4" class="com.hibernate.SpringLab1.Book">
+		<constructor-arg name="b_id" value="B43"></constructor-arg>
+		<constructor-arg name="b_name" value="CSS"></constructor-arg>
+		<constructor-arg name="price" value="590"></constructor-arg>
+
+	</bean>
+
+
+
+	<!-- Address -->
+	
+	<!-- Address  class bean 1-->
+	<bean id="Address1" class="com.hibernate.SpringLab1.Address">
+		<constructor-arg name="hno" value="357/7"></constructor-arg>
+		<constructor-arg name="area" value="Palwal"></constructor-arg>
+		<constructor-arg name="city" value="Palwal"></constructor-arg>
+	</bean>
+
+<!-- Address  class bean 2-->
+	<bean id="Address2" class="com.hibernate.SpringLab1.Address">
+		<constructor-arg name="hno" value="36/1"></constructor-arg>
+		<constructor-arg name="area" value="Palwal"></constructor-arg>
+		<constructor-arg name="city" value="Faridabad"></constructor-arg>
+	</bean>
+
+
+<!-- Student class bean 1-->
+	<bean id="studentbean1" class="com.hibernate.SpringLab1.Student">
+
+		<constructor-arg name="s_id" value="B3285"></constructor-arg>
+		<constructor-arg name="s_name" value="Prince Pathak"></constructor-arg>
+
+		<constructor-arg name="b_list">
+			<list>
+				<ref bean="book1"></ref>
+				<ref bean="book2"></ref>
+			</list>
+		</constructor-arg>
+		<constructor-arg name="address">
+			<ref bean="Address1" />
+		</constructor-arg>
+	</bean>
+
+<!-- Address  class bean 2-->
+	<bean id="studentbean2" class="com.hibernate.SpringLab1.Student">
+
+		<constructor-arg name="s_id" value="N6795"></constructor-arg>
+		<constructor-arg name="s_name" value="Manish"></constructor-arg>
+
+		<constructor-arg name="b_list">
+			<list>
+				<ref bean="book3"></ref>
+				<ref bean="book4"></ref>
+			</list>
+		</constructor-arg>
+		<constructor-arg name="address">
+			<ref bean="Address2" />
+		</constructor-arg>
+	</bean>
+
+
+</beans>
+            
